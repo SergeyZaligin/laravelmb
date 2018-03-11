@@ -26,4 +26,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Связь пользователя с постами
+     * один пользователь множество постов
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Связь пользователя с комментариями
+     * одни пользователь множество комментариев
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

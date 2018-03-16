@@ -13,6 +13,14 @@ class Post extends Model
     use Sluggable;
 
     /**
+     * Поля для заполнения бд
+     */
+    protected $fillable = [
+        'title',
+        'content'
+    ];
+
+    /**
      * Пост имеет связь один к одному с категорией
      */
     public function category()
@@ -55,4 +63,26 @@ class Post extends Model
             ]
         ];
     }
+
+    /**
+     * Добавление статьи
+     */
+    public static function add($fields)
+    {
+        $post = new static;
+        $post->fill($fields);
+
+        // Принудительное присваивание роли пользователя
+        $post->user_id = 1;
+
+        $post->save();
+
+        return $post;
+    }
+
+    public static function edit($fields)
+    {
+
+    }
+    
 }
